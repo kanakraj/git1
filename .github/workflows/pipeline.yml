@@ -3,7 +3,7 @@ name: NodeJs
 on:
   push:
     branches:
-      - master
+      - main
 
 permissions:
   security-events: write
