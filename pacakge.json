@@ -1,0 +1,8 @@
+{ 
+  "name": "git1", 
+  "version": "0.0.1", 
+  "private": true, 
+  "scripts": { 
+    "test": "echo "No tests specified" && exit 0" 
+  }, 
+  "dependencies": { // your dependencies } }
