@@ -1,77 +1,58 @@
-name: Simple CI-CD Pipeline
+name: NodeJs
 
-# Trigger pipeline whenever code is pushed
 on:
   push:
     branches:
+      - master
       - main
+      - dev
+      - release
 
+permissions:
+  security-events: write
+  issues: write
+  actions: read
+  contents: read
 
 jobs:
-
-  # ======================
-  # BUILD ENVIRONMENT
-  # ======================
   build:
-    name: Build Environment
-    runs-on: self-hosted
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
 
     steps:
-
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Build
+        run: npm install
 
-      - name: Build Application
-        run: |
-          echo "Starting Build..."
-          echo "Installing dependencies..."
-          echo "Compiling application..."
-          echo "Build completed successfully"
+      - name: Upload file as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: shared-data
+          path: ~/.npm
 
-
-
-  # ======================
-  # TEST ENVIRONMENT
-  # ======================
   test:
-    name: Test Environment
-    runs-on: self-hosted
-
+    runs-on: ubuntu-latest
     needs: build
 
     steps:
-
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Build
+        run: npm install
 
-      - name: Run Tests
-        run: |
-          echo "Starting Tests..."
-          echo "Running unit tests..."
-          echo "Running integration tests..."
-          echo "All tests passed successfully"
+      - name: Test
+        run: npm test
 
-
-
-  # ======================
-  # DEPLOY ENVIRONMENT
-  # ======================
   deploy:
-    name: Deploy Environment
-    runs-on: self-hosted
-
+    runs-on: ubuntu-latest
     needs: test
 
     steps:
-
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
-
-      - name: Deploy Application
-        run: |
-          echo "Starting Deployment..."
-          echo "Copying application files..."
-          echo "Application deployed successfully!"
+      - name: Deploy
+        run: echo "My code is deployed !!"
