@@ -26,7 +26,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      - name: Initialize CodeQL
+     - name: Check for JavaScript/TypeScript files
+       id: check-js
+       run: |
+          # If repository contains JS/TS files or a package.json, mark has_js=true
+          if git ls-files '*.js' '*.ts' | grep -q . || [ -f package.json ]; then
+            echo "has_js=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_js=false" >> $GITHUB_OUTPUT
+          fi
+
+
+     - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
           languages: 'javascript-typescript'
