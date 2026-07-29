@@ -3,10 +3,9 @@ name: NodeJs
 on:
   push:
     branches:
-      - master
       - main
       - dev
-      - release
+
 
 permissions:
   security-events: write
@@ -16,7 +15,7 @@ permissions:
 
 jobs:
   build:
-    if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
+   # if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
