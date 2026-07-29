@@ -21,24 +21,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Check for JavaScript/TypeScript files
-        id: check-js
-        shell: bash
-        run: |
-          if git ls-files '*.js' '*.ts' | grep -q .; then
-          echo "has_js=true" >> "$GITHUB_OUTPUT"
-          else
-          echo "has_js=false" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Initialize CodeQL
-        if: steps.check-js.outputs.has_js == 'true'
         uses: github/codeql-action/init@v3
         with:
-          languages: javascript-typescript
-    
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+          languages: 'javascript-typescript"
+
+       - name: Perform CodeQL Analysis
+         uses: github/codeql-action/amalyze@v3
     
       - name: Build
         run: npm install
