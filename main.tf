@@ -16,6 +16,6 @@ resource "aws_instance" "github_runner" {
   instance_type = "t2.micro"
 
   tags = {
-    Name = "github"
+    Name = "github-codeql"
   }
 }
