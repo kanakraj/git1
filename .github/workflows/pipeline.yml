@@ -3,8 +3,10 @@ name: NodeJs
 on:
   push:
     branches:
+      - master
       - main
       - dev
+      - release
 
 permissions:
   security-events: write
@@ -14,7 +16,7 @@ permissions:
 
 jobs:
   build:
-    #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/dev' && github.event_name == 'push'
     runs-on: ubuntu-latest
 
     steps:
@@ -28,10 +30,10 @@ jobs:
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
-    
+
       - name: Build
         run: npm install
-    
+
       - name: Upload file as artifact
         uses: actions/upload-artifact@v4
         with:
