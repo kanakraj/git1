@@ -3,6 +3,7 @@ name: NodeJs
 on:
   push:
     branches:
+      - master
       - main
       - dev
       - release
@@ -15,26 +16,12 @@ permissions:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
-        node-version: [18, 20, 22]
+    #if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Check for JavaScript/TypeScript files
-        id: check-js
-        run: |
-          # If repository contains JS/TS files or a package.json, mark has_js=true
-          if git ls-files '*.js' '*.ts' | grep -q . || [ -f package.json ]; then
-            echo "has_js=true" >> $GITHUB_OUTPUT
-          else
-            echo "has_js=false" >> $GITHUB_OUTPUT
-          fi
 
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
