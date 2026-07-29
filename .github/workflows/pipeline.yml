@@ -15,20 +15,20 @@ permissions:
 
 jobs:
   build:
-    # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    runs-on: ${{ matrix.os }} # Dynamically chooses the OS
+    runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        node-version: [18, 20, 22] # Defines version variables  
+        node-version: [18, 20, 22]
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
-     - name: Check for JavaScript/TypeScript files
-       id: check-js
-       run: |
+
+      - name: Check for JavaScript/TypeScript files
+        id: check-js
+        run: |
           # If repository contains JS/TS files or a package.json, mark has_js=true
           if git ls-files '*.js' '*.ts' | grep -q . || [ -f package.json ]; then
             echo "has_js=true" >> $GITHUB_OUTPUT
@@ -36,15 +36,14 @@ jobs:
             echo "has_js=false" >> $GITHUB_OUTPUT
           fi
 
-
-     - name: Initialize CodeQL
+      - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
-          languages: 'javascript-typescript'
-      
+          languages: javascript-typescript
+
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3  
-      
+        uses: github/codeql-action/analyze@v3
+
       - name: Build
         run: npm install
 
