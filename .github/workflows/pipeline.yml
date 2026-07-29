@@ -26,8 +26,8 @@ jobs:
         with:
           languages: 'javascript-typescript'
 
-       - name: Perform CodeQL Analysis
-         uses: github/codeql-action/amalyze@v3
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/amalyze@v3
     
       - name: Build
         run: npm install
