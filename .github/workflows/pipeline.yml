@@ -3,10 +3,8 @@ name: NodeJs
 on:
   push:
     branches:
-      - master
       - main
       - dev
-      - release
 
 permissions:
   security-events: write
