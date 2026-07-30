@@ -1,5 +1,5 @@
 function hello() {
-  console.log("Hello GitHub Action");
+  console.log("Hello GitHub Actions");
 }
 
 hello();
