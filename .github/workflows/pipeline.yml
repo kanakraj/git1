@@ -23,9 +23,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -33,9 +30,10 @@ jobs:
       
       - name: Install Dependencies
         run: npm install
-      
+    
       - name: Build
-        run: echo "Build successful"
+        run: npm run build
+
       
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
