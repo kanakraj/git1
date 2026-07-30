@@ -1,17 +1,27 @@
 version: 2
+
 updates:
   - package-ecosystem: "npm"
-    directory: "/" 
+    directory: "/"
     schedule:
-    interval: "weekly" 
-  open-pull-requests-limit: 10 
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - security
+    commit-message:
+      prefix: "deps"
+    reviewers:
+      - kanakraj
 
-  labels:
-    - dependencies
-    - security
-
-  commit-message:
-  prefix: "deps" 
-
-  reviewers:
-    - kanakraj 
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - dependencies
+      - security
+    commit-message:
+      prefix: "deps"
+    reviewers:
+      - kanakraj
