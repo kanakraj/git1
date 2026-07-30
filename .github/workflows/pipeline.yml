@@ -1,10 +1,26 @@
 name: CI-WORKFLOW
 
 on:
-  push:
+  workflow_dispatch:
+    inputs:
+      log_level:
+        description: 'Select system logging verbosity'
+        required: true
+        default: 'INFO'
+        type: choice
+        options:
+          - DEBUG
+          - INFO
+          - WARNING
+          - ERROR
+      run_tests:
+        description: 'Execute test suite before deployment?'
+        required: true
+        default: true
+        type: boolean
 
 jobs:
-  buil-test:
+  build-test:
     runs-on: ubuntu-22.04
 
     steps:
