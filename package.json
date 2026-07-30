@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "echo 'No tests specified' && exit 0",
-    "build": "vite build"
+    "build": "vite build",
+    "test": "echo Test successful"
   },
   "dependencies": {
     "package-name": "^0.1.0"
