@@ -3,12 +3,12 @@ name: CI-WORKFLOW
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   # Call the reusable workflow as a complete job
   run-ci:
-    uses: kanakraj/git1/.github/workflows/pipeline.yml
+    uses: kanakraj/git1/.github/workflows/pipeline.yml@dev
     with:
       node-version: "20"
     secrets:
