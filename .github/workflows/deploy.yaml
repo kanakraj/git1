@@ -1,0 +1,23 @@
+name: CI-WORKFLOW
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # Call the reusable workflow as a complete job
+  run-ci:
+    uses: kanakraj/git1/.github/workflows/pipeline.yml
+    with:
+      node-version: "20"
+    secrets:
+      API_TOKEN: ${{ secrets.PROD_API_TOKEN }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: run-ci
+
+    steps:
+      - name: Deploy
+        run: echo "my code is deployed"
